@@ -1,4 +1,6 @@
 <?php
+// We need to use sessions, so you should always start sessions using the below code.
+session_start();
 include 'functions.php';
 // Connect to MySQL using the below function
 $pdo = pdo_connect_mysql();
@@ -41,7 +43,10 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<?php endforeach; ?>
 	</div>
 
-    <div class="login">
+    <?php
+if (!isset($_SESSION['loggedin'])) {
+?>
+		<div class="login">
 			<h1>Login</h1>
 			<form action="authenticate.php" method="post">
 				<label for="username">
@@ -55,6 +60,9 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				<input type="submit" value="Login">
 			</form>
 		</div>
+<?php
+}
+?>
 
 </div>
 

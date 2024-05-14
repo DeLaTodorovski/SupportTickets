@@ -13,8 +13,23 @@ function pdo_connect_mysql() {
     }
 }
 
+
+
+
+
 // Template header, feel free to customize this
 function template_header($title) {
+
+    if (!isset($_SESSION['loggedin'])) {
+            
+        $loginbtn = 'Login';
+        $loginlink = 'login.php';
+    
+    }else{
+
+        $loginbtn = 'Logout';
+        $loginlink = 'logout.php';
+    }
     echo <<<EOT
     <!DOCTYPE html>
     <html>
@@ -29,6 +44,8 @@ function template_header($title) {
             <div>
                 <h1>Ticketing System</h1>
                 <a href="index.php"><i class="fas fa-ticket-alt"></i>Tickets</a>
+                <a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
+                <a href="$loginlink"><i class="fas fa-sign-out-alt"></i>$loginbtn</a>
             </div>
         </nav>
     EOT;
